@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "personalWebsite",
+    "scheme": "personalwebsite",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
     "web": {
@@ -8,10 +8,14 @@
     },
     "name": "personalWebsite",
     "slug": "personalWebsite",
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font",
+      "expo-router",
+      "expo-secure-store",
+      "expo-web-browser"
+    ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
     }
   }
 }
