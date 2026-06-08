@@ -1,19 +1,37 @@
 # Dependencies
-node_modules
+node_modules/
 .pnp
 .pnp.js
 
 # Build outputs
-dist
-build
+dist/
+build/
+out/
 *.tsbuildinfo
 
 # Generated files
 apps/web/src/routeTree.gen.ts
+uniwind-types.d.ts
 
-# Environment variables
+# Environment variables and secrets
 .env
-.env*.local
+.env.*
+!.env.example
+.dev.vars
+
+# Cloudflare
+.wrangler/
+.mf/
+
+# Expo / React Native
+.expo/
+web-build/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.metro-health-check*
 
 # IDEs and editors
 .vscode/*
@@ -21,14 +39,15 @@ apps/web/src/routeTree.gen.ts
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.idea
+.idea/
+.cursor/
 *.swp
 *.swo
 *~
 .DS_Store
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -36,19 +55,24 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# Turbo
-.turbo
-.nx
+# Turbo / monorepo
+.turbo/
+.nx/
 
-# Better-T-Stack
-.alchemy
+# Better-T-Stack / infra
+.alchemy/
 
 # Testing
-coverage
-.nyc_output
+coverage/
+.nyc_output/
+
+# Local databases
+*.db
+*.db-journal
 
 # Misc
 *.tgz
-.cache
-tmp
-temp
+.cache/
+tmp/
+temp/
+*.pem
