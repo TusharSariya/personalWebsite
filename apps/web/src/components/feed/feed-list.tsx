@@ -36,7 +36,7 @@ export function FeedList() {
 	const rowVirtualizer = useVirtualizer({
 		count: posts.length,
 		getScrollElement: () => parentRef.current,
-		estimateSize: () => 320,
+		estimateSize: () => 480,
 		overscan: 4,
 	});
 
@@ -60,13 +60,24 @@ export function FeedList() {
 	}, [virtualItems, posts.length, loadMore]);
 
 	if (feedQuery.isLoading) {
-		return <p className="text-muted-foreground">Loading feed...</p>;
+		return <p className="px-4 py-6 text-muted-foreground">Loading feed...</p>;
 	}
 
 	if (feedQuery.isError) {
 		return (
-			<div className="space-y-3">
+			<div className="space-y-3 px-4 py-6">
 				<p>Could not load your feed.</p>
+				{usesMockFeed ? null : (
+					<p className="text-muted-foreground text-sm">
+						Sign in and run{" "}
+						<code className="rounded bg-muted px-1">bun run dev:server</code>,
+						or set{" "}
+						<code className="rounded bg-muted px-1">
+							VITE_USE_MOCK_FEED=true
+						</code>{" "}
+						in apps/web/.env for demo posts.
+					</p>
+				)}
 				<Button onClick={() => feedQuery.refetch()}>Retry</Button>
 			</div>
 		);
@@ -94,20 +105,14 @@ export function FeedList() {
 	}
 
 	return (
-		<div className="space-y-4">
-			{usesMockFeed ? <MockFeedBanner /> : null}
+		<div className="flex h-full flex-col">
+			{usesMockFeed ? (
+				<div className="shrink-0 px-4 pt-4">
+					<MockFeedBanner />
+				</div>
+			) : null}
 
-			<div className="flex items-center justify-between">
-				<p className="text-muted-foreground text-sm">
-					{posts.length} posts loaded
-					{usesMockFeed ? " (mock)" : ""}
-				</p>
-				<Button variant="outline" size="sm" onClick={() => feedQuery.refetch()}>
-					Refresh
-				</Button>
-			</div>
-
-			<div ref={parentRef} className="h-[70vh] overflow-auto rounded-xl border">
+			<div ref={parentRef} className="min-h-0 flex-1 overflow-auto">
 				<div
 					style={{
 						height: `${rowVirtualizer.getTotalSize()}px`,
@@ -130,7 +135,6 @@ export function FeedList() {
 									width: "100%",
 									transform: `translateY(${virtualRow.start}px)`,
 								}}
-								className="px-4 pt-4"
 							>
 								<PostCard post={item} />
 							</div>
@@ -140,7 +144,7 @@ export function FeedList() {
 			</div>
 
 			{feedQuery.isFetchingNextPage ? (
-				<p className="text-center text-muted-foreground text-sm">
+				<p className="shrink-0 py-3 text-center text-muted-foreground text-sm">
 					Loading more...
 				</p>
 			) : null}

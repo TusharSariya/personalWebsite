@@ -11,22 +11,19 @@ function FeedRoute() {
 	const usesMockFeed = isMockFeedEnabled();
 
 	return (
-		<div className="container mx-auto max-w-2xl px-4 py-6">
-			<div className="mb-6">
-				<h1 className="font-bold text-3xl">Feed</h1>
-				<p className="mt-1 text-muted-foreground">
-					Chronological life log with photos, runs, books, and articles.
-				</p>
+		<div className="mx-auto flex h-full min-h-0 w-full max-w-[600px] flex-col">
+			<header className="shrink-0 border-border border-b px-4 py-3">
+				<h1 className="font-semibold text-lg">Home</h1>
 				{usesMockFeed ? (
-					<p className="mt-2 text-muted-foreground text-sm">
-						Launch instantly with mock data.{" "}
+					<p className="text-muted-foreground text-xs">
+						Demo feed —{" "}
 						<Link to="/login" className="underline">
-							Sign in
+							sign in
 						</Link>{" "}
-						when you are ready to use the real API.
+						for the real API
 					</p>
 				) : null}
-			</div>
+			</header>
 			<FeedList />
 		</div>
 	);

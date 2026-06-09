@@ -161,6 +161,7 @@
       },
       "devDependencies": {
         "@personalWebsite/config": "workspace:*",
+        "fast-xml-parser": "^5.2.5",
         "hono": "catalog:",
         "typescript": "catalog:",
       },

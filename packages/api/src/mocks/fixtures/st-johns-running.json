@@ -1,0 +1,67 @@
+{
+	"content": {
+		"title": "St John's Running",
+		"activityType": "run",
+		"distanceKm": 5.1,
+		"durationMinutes": 43,
+		"source": "garmin",
+		"device": "Forerunner 255",
+		"avgHeartRate": 159,
+		"calories": 355,
+		"paceMinPerKm": 8.4,
+		"startedAt": "2026-05-23T20:01:01.000Z",
+		"mapImageUrl": "https://staticmap.openstreetmap.de/staticmap.php?center=47.57,-52.71&zoom=13&size=800x400&maptype=mapnik"
+	},
+	"meta": {
+		"sourceId": "23165095318",
+		"startedAt": "2026-05-23T20:01:01.000Z",
+		"device": "Forerunner 255",
+		"sport": "Running",
+		"durationSeconds": 2558,
+		"distanceMeters": 5141,
+		"laps": [
+			{
+				"distanceMeters": 1000,
+				"durationSeconds": 446,
+				"avgHeartRate": 160,
+				"maxHeartRate": 172,
+				"calories": 69
+			},
+			{
+				"distanceMeters": 1000,
+				"durationSeconds": 493,
+				"avgHeartRate": 160,
+				"maxHeartRate": 171,
+				"calories": 68
+			},
+			{
+				"distanceMeters": 1000,
+				"durationSeconds": 531,
+				"avgHeartRate": 155,
+				"maxHeartRate": 175,
+				"calories": 70
+			},
+			{
+				"distanceMeters": 1000,
+				"durationSeconds": 506,
+				"avgHeartRate": 161,
+				"maxHeartRate": 174,
+				"calories": 71
+			},
+			{
+				"distanceMeters": 1000,
+				"durationSeconds": 510,
+				"avgHeartRate": 158,
+				"maxHeartRate": 176,
+				"calories": 67
+			},
+			{
+				"distanceMeters": 141,
+				"durationSeconds": 72,
+				"avgHeartRate": 163,
+				"maxHeartRate": 176,
+				"calories": 10
+			}
+		]
+	}
+}

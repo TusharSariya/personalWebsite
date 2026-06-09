@@ -18,6 +18,7 @@ export const photoContentSchema = z.object({
 	imageUrl: z.string().url(),
 	width: z.number().int().positive().optional(),
 	height: z.number().int().positive().optional(),
+	location: z.string().optional(),
 });
 
 export const activityContentSchema = z.object({
@@ -26,6 +27,12 @@ export const activityContentSchema = z.object({
 	distanceKm: z.number().nonnegative().optional(),
 	durationMinutes: z.number().nonnegative().optional(),
 	mapImageUrl: z.string().url().optional(),
+	source: z.literal("garmin").optional(),
+	device: z.string().optional(),
+	avgHeartRate: z.number().nonnegative().optional(),
+	calories: z.number().nonnegative().optional(),
+	paceMinPerKm: z.number().nonnegative().optional(),
+	startedAt: z.string().optional(),
 });
 
 export const bookContentSchema = z.object({
@@ -42,6 +49,7 @@ export const articleContentSchema = z.object({
 	slug: z.string().min(1),
 	excerpt: z.string().min(1),
 	body: z.string().optional(),
+	imageUrls: z.array(z.string().url()).max(4).optional(),
 });
 
 export const postContentSchema = z.discriminatedUnion("type", [

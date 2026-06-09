@@ -87,11 +87,10 @@ export function FeedList() {
 
 	return (
 		<View className="flex-1">
-			{usesMockFeed ? <MockFeedBanner /> : null}
 			<FlashList
 				data={posts}
 				renderItem={renderItem}
-				estimatedItemSize={320}
+				estimatedItemSize={480}
 				keyExtractor={(item) => item.id}
 				onEndReached={handleEndReached}
 				onEndReachedThreshold={0.5}
@@ -101,6 +100,13 @@ export function FeedList() {
 						onRefresh={() => feedQuery.refetch()}
 					/>
 				}
+				ListHeaderComponent={
+					usesMockFeed ? (
+						<View className="px-4 pt-4">
+							<MockFeedBanner />
+						</View>
+					) : null
+				}
 				ListFooterComponent={
 					feedQuery.isFetchingNextPage ? (
 						<View className="py-4">
@@ -108,7 +114,6 @@ export function FeedList() {
 						</View>
 					) : null
 				}
-				contentContainerStyle={{ padding: 16 }}
 			/>
 		</View>
 	);

@@ -45,7 +45,8 @@
 		"db:migrate": "turbo -F @personalWebsite/db db:migrate",
 		"deploy": "turbo -F @personalWebsite/infra deploy -- --stage prod",
 		"destroy": "turbo -F @personalWebsite/infra destroy",
-		"check": "biome check --write ."
+		"check": "biome check --write .",
+		"extract:garmin-fixture": "bun packages/api/scripts/extract-garmin-fixture.ts"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,json,jsonc,css}": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"

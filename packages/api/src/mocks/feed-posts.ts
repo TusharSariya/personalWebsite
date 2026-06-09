@@ -1,46 +1,34 @@
 import type { ListPostsOutput, Post } from "../schemas/posts";
 import { decodeCursor, encodeCursor } from "../utils/cursor";
+import stJohnsRunning from "./fixtures/st-johns-running.json";
 
-const demoPostTemplates = [
-	{
-		type: "text" as const,
-		visibility: "private" as const,
-		content: { body: "Starting my life log. One feed for everything." },
-	},
+type DemoPostTemplate = {
+	type: Post["type"];
+	visibility: Post["visibility"];
+	content: Post["content"];
+	mockCreatedAt?: string;
+};
+
+export const MOCK_USER_ID = "mock-user-1";
+
+export const MOCK_FEED_AUTHOR = {
+	displayName: "Tushar",
+	username: "tushar",
+	avatarUrl:
+		"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=128",
+};
+
+const demoPostTemplates: DemoPostTemplate[] = [
 	{
 		type: "photo" as const,
 		visibility: "public" as const,
 		content: {
-			caption: "Golden hour walk",
+			caption: "Golden hour along the harbour — St John's never gets old.",
 			imageUrl:
 				"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
 			width: 800,
-			height: 600,
-		},
-	},
-	{
-		type: "activity" as const,
-		visibility: "friends" as const,
-		content: {
-			title: "Morning Run",
-			activityType: "run",
-			distanceKm: 5.2,
-			durationMinutes: 28,
-			mapImageUrl:
-				"https://images.unsplash.com/photo-1476480862126-209bfaa8dfc8?w=800",
-		},
-	},
-	{
-		type: "book" as const,
-		visibility: "private" as const,
-		content: {
-			title: "Project Hail Mary",
-			author: "Andy Weir",
-			coverUrl:
-				"https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400",
-			rating: 4.5,
-			status: "reading" as const,
-			review: "Halfway through and hooked.",
+			height: 800,
+			location: "St John's, NL",
 		},
 	},
 	{
@@ -50,9 +38,41 @@ const demoPostTemplates = [
 			title: "Why one feed beats five apps",
 			slug: "why-one-feed",
 			excerpt:
-				"Photos, runs, books, and essays belong in one chronological timeline.",
-			body: "A single scroll makes memory easier to browse later.",
+				"Photos, runs, books, and essays belong in one chronological timeline — not scattered across silos.",
+			body: "A single scroll makes memory easier to browse later. When everything lives in one place, patterns emerge: the book you finished the week you ran your first 5K, the essay you wrote after a trip.",
+			imageUrls: [
+				"https://images.unsplash.com/photo-1499750310107-5fef28fd717f?w=600",
+				"https://images.unsplash.com/photo-1455390582261-044cdead277a?w=600",
+			],
 		},
+	},
+	{
+		type: "book" as const,
+		visibility: "public" as const,
+		content: {
+			title: "Project Hail Mary",
+			author: "Andy Weir",
+			coverUrl:
+				"https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400",
+			rating: 4.5,
+			status: "read" as const,
+			review:
+				"Rocky and Grace might be the best duo in sci-fi since Kirk and Spock. Weir nails the science without losing the heart — I finished it in three sittings and immediately wanted to reread the ending.",
+		},
+	},
+	{
+		type: "activity",
+		visibility: "friends",
+		content: {
+			...stJohnsRunning.content,
+			source: "garmin" as const,
+		},
+		mockCreatedAt: stJohnsRunning.meta.startedAt,
+	},
+	{
+		type: "text" as const,
+		visibility: "private" as const,
+		content: { body: "Starting my life log. One feed for everything." },
 	},
 	{
 		type: "text" as const,
@@ -141,9 +161,7 @@ const demoPostTemplates = [
 			excerpt: "Same shell, different innards for photos, runs, and essays.",
 		},
 	},
-] as const;
-
-export const MOCK_USER_ID = "mock-user-1";
+];
 
 export const MOCK_FEED_POSTS: Post[] = demoPostTemplates.map((demo, index) => ({
 	id: `mock-post-${index + 1}`,
@@ -151,7 +169,9 @@ export const MOCK_FEED_POSTS: Post[] = demoPostTemplates.map((demo, index) => ({
 	type: demo.type,
 	visibility: demo.visibility,
 	content: demo.content,
-	createdAt: new Date(Date.now() - index * 60 * 60 * 1000).toISOString(),
+	createdAt:
+		demo.mockCreatedAt ??
+		new Date(Date.now() - index * 60 * 60 * 1000).toISOString(),
 }));
 
 export function listMockPosts(cursor?: string, limit = 20): ListPostsOutput {

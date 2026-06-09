@@ -15,7 +15,9 @@
 			"default": "./src/mocks/index.ts"
 		}
 	},
-	"scripts": {},
+	"scripts": {
+		"extract:garmin-fixture": "bun scripts/extract-garmin-fixture.ts"
+	},
 	"dependencies": {
 		"@orpc/client": "catalog:",
 		"@orpc/openapi": "catalog:",
@@ -30,6 +32,7 @@
 	},
 	"devDependencies": {
 		"@personalWebsite/config": "workspace:*",
+		"fast-xml-parser": "^5.2.5",
 		"hono": "catalog:",
 		"typescript": "catalog:"
 	}
