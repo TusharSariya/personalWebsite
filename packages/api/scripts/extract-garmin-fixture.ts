@@ -3,6 +3,11 @@ import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { XMLParser } from "fast-xml-parser";
 
+import {
+	downsampleRoutePoints,
+	parseGpxTrackPointsFromDoc,
+} from "../src/utils/activity-route";
+
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(scriptDir, "../../..");
 const defaultTcx = join(repoRoot, "activity_23165095318.tcx");
@@ -81,12 +86,25 @@ function tcxActivity(tcxPath: string) {
 	};
 }
 
-function gpxTitle(gpxPath: string): string | undefined {
+function gpxData(gpxPath: string) {
 	const xml = readFileSync(gpxPath, "utf8");
 	const doc = parser.parse(xml);
 	const tracks = asArray(doc.gpx?.trk);
 	const name = tracks[0]?.name;
-	return typeof name === "string" && name.length > 0 ? name : undefined;
+	const title = typeof name === "string" && name.length > 0 ? name : undefined;
+	const routePoints = downsampleRoutePoints(
+		parseGpxTrackPointsFromDoc(doc),
+		80,
+	).map((point) => ({
+		lat: roundCoord(point.lat),
+		lng: roundCoord(point.lng),
+	}));
+
+	return { title, routePoints };
+}
+
+function roundCoord(n: number): number {
+	return Math.round(n * 1_000_000) / 1_000_000;
 }
 
 function sportToActivityType(sport: string): string {
@@ -104,7 +122,8 @@ function round1(n: number): number {
 }
 
 const tcx = tcxActivity(tcxPath);
-const title = gpxTitle(gpxPath) ?? `${tcx.sport} activity`;
+const gpx = gpxData(gpxPath);
+const title = gpx.title ?? `${tcx.sport} activity`;
 
 const laps = tcx.laps.map((lap) => ({
 	distanceMeters: Math.round(lap.distanceMeters),
@@ -141,8 +160,7 @@ const fixture = {
 		calories: totalCalories > 0 ? totalCalories : undefined,
 		paceMinPerKm,
 		startedAt: tcx.startedAt,
-		mapImageUrl:
-			"https://staticmap.openstreetmap.de/staticmap.php?center=47.57,-52.71&zoom=13&size=800x400&maptype=mapnik",
+		routePoints: gpx.routePoints.length >= 2 ? gpx.routePoints : undefined,
 	},
 	meta: {
 		sourceId: tcx.sourceId,

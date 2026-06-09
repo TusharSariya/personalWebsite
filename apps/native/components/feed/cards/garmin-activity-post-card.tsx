@@ -1,30 +1,30 @@
 import type { Post } from "@personalWebsite/api/schemas/posts";
-import { Image } from "expo-image";
+import type { RoutePoint } from "@personalWebsite/api/utils/activity-route";
 import { Text, View } from "react-native";
 
 import { formatPace } from "../utils/format-pace";
 
+import { ActivityRouteMap } from "./activity-route-map";
+
+type GarminActivityContent = {
+	title: string;
+	activityType: string;
+	distanceKm?: number;
+	durationMinutes?: number;
+	routePoints?: RoutePoint[];
+	device?: string;
+	avgHeartRate?: number;
+	paceMinPerKm?: number;
+	calories?: number;
+};
+
 export function GarminActivityPostCard({ post }: { post: Post }) {
-	const content = post.content as {
-		title: string;
-		activityType: string;
-		distanceKm?: number;
-		durationMinutes?: number;
-		mapImageUrl?: string;
-		device?: string;
-		avgHeartRate?: number;
-		paceMinPerKm?: number;
-		calories?: number;
-	};
+	const content = post.content as GarminActivityContent;
 
 	return (
 		<View className="retro-panel-inset overflow-hidden">
-			{content.mapImageUrl ? (
-				<Image
-					source={{ uri: content.mapImageUrl }}
-					style={{ width: "100%", height: 160 }}
-					contentFit="cover"
-				/>
+			{content.routePoints && content.routePoints.length >= 2 ? (
+				<ActivityRouteMap routePoints={content.routePoints} />
 			) : null}
 			<View className="gap-3 p-4">
 				<View className="flex-row items-start justify-between gap-2">

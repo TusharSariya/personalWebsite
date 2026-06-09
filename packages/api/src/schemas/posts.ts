@@ -21,12 +21,18 @@ export const photoContentSchema = z.object({
 	location: z.string().optional(),
 });
 
+export const routePointSchema = z.object({
+	lat: z.number().min(-90).max(90),
+	lng: z.number().min(-180).max(180),
+});
+
 export const activityContentSchema = z.object({
 	title: z.string().min(1),
 	activityType: z.string().min(1),
 	distanceKm: z.number().nonnegative().optional(),
 	durationMinutes: z.number().nonnegative().optional(),
 	mapImageUrl: z.string().url().optional(),
+	routePoints: z.array(routePointSchema).min(2).optional(),
 	source: z.literal("garmin").optional(),
 	device: z.string().optional(),
 	avgHeartRate: z.number().nonnegative().optional(),
