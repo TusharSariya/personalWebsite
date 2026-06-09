@@ -12,7 +12,7 @@ const stage = process.env.STAGE ?? process.env.ALCHEMY_STAGE ?? "dev";
 const isPreview = stage.startsWith("pr-");
 
 const databaseUrlSecret = isPreview
-	? (process.env.DATABASE_URL_STAGING ?? process.env.DATABASE_URL)
+	? process.env.DATABASE_URL_STAGING || process.env.DATABASE_URL
 	: process.env.DATABASE_URL;
 
 if (!databaseUrlSecret) {
