@@ -32,14 +32,12 @@ jobs:
         env:
           DATABASE_URL_PROD: ${{ secrets.DATABASE_URL }}
           DATABASE_URL_STAGING: ${{ secrets.DATABASE_URL_STAGING }}
-          IS_PULL_REQUEST: ${{ github.event_name == 'pull_request' }}
         run: |
-          if [ "$IS_PULL_REQUEST" = "true" ] && [ -n "$DATABASE_URL_STAGING" ]; then
-            export DATABASE_URL="$DATABASE_URL_STAGING"
+          if [ "${{ github.event_name }}" = "pull_request" ] && [ -n "$DATABASE_URL_STAGING" ]; then
+            DATABASE_URL="$DATABASE_URL_STAGING" bun run db:migrate
           else
-            export DATABASE_URL="$DATABASE_URL_PROD"
+            DATABASE_URL="$DATABASE_URL_PROD" bun run db:migrate
           fi
-          bun run db:migrate
 
       - name: Deploy to Cloudflare
         working-directory: packages/infra

@@ -43,7 +43,7 @@ const app = await alchemy("personalWebsite", {
 
 const sharedBindings = {
 	DATABASE_URL: alchemy.secret(databaseUrlSecret),
-	BETTER_AUTH_SECRET: alchemy.secret.env.BETTER_AUTH_SECRET,
+	BETTER_AUTH_SECRET: alchemy.secret(process.env.BETTER_AUTH_SECRET),
 	WORKERS_DEV_SUBDOMAIN: alchemy.env.WORKERS_DEV_SUBDOMAIN ?? "",
 };
 
