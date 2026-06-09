@@ -307,13 +307,39 @@ Mobile is the same flow, except Expo sends the session cookie manually (see `app
 | `bun run dev:native` | Expo dev server |
 | `bun run build` | Production build for all apps |
 | `bun run check-types` | TypeScript check across the monorepo |
-| `bun run check` | Biome lint + format |
+| `bun run check` | Biome lint + format (auto-fix locally) |
+| `bun run check:ci` | Biome lint only (read-only; used in CI) |
+| `bun run validate` | Typecheck + lint + build (pre-push hook) |
 | `bun run db:push` | Apply schema to Supabase (quick dev) |
 | `bun run db:migrate` | Run SQL migration files |
 | `bun run db:generate` | Generate new migration from schema changes |
 | `bun run db:studio` | Open Drizzle Studio (DB browser) |
-| `bun run deploy` | Deploy web + server to Cloudflare (Alchemy) |
+| `bun run deploy` | Deploy prod to Cloudflare (`--stage prod`) |
 | `bun run destroy` | Tear down Cloudflare resources (careful) |
+
+---
+
+## Contributing
+
+### Git hooks
+
+Hooks install automatically on `bun install` (via Husky).
+
+| Hook | Runs |
+|------|------|
+| **pre-commit** | Biome on staged files only (`lint-staged`) |
+| **pre-push** | `bun run validate` — typecheck, lint, and production build |
+
+Avoid `git push --no-verify` unless you have a good reason; CI runs the same checks on every PR.
+
+### CI and deploy
+
+On every pull request and push to `master`:
+
+- **CI** — parallel `lint`, `typecheck`, `build`, and `secret-scan` jobs
+- **Deploy** — Cloudflare preview (`pr-{number}`) when app/package code changes; skipped for docs-only PRs
+
+Merges to `master` require `lint`, `typecheck`, and `build` to pass. See [DEPLOY.md](DEPLOY.md) for Cloudflare setup.
 
 ---
 

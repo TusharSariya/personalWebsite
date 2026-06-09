@@ -28,9 +28,12 @@
 	},
 	"type": "module",
 	"scripts": {
+		"prepare": "husky",
 		"dev": "turbo -F @personalWebsite/infra -F native dev",
 		"build": "turbo build",
 		"check-types": "turbo check-types",
+		"check:ci": "biome check .",
+		"validate": "bun run check-types && bun run check:ci && bun run build",
 		"dev:native": "turbo -F native dev",
 		"debug:native": "cd apps/native && npx expo-doctor && npx expo config --type public",
 		"dev:web": "turbo -F web dev",
@@ -40,9 +43,12 @@
 		"db:studio": "turbo -F @personalWebsite/db db:studio",
 		"db:generate": "turbo -F @personalWebsite/db db:generate",
 		"db:migrate": "turbo -F @personalWebsite/db db:migrate",
-		"deploy": "turbo -F @personalWebsite/infra deploy",
+		"deploy": "turbo -F @personalWebsite/infra deploy -- --stage prod",
 		"destroy": "turbo -F @personalWebsite/infra destroy",
 		"check": "biome check --write ."
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx,json,jsonc,css}": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
 	},
 	"dependencies": {
 		"@personalWebsite/env": "workspace:*",
@@ -54,6 +60,8 @@
 		"@cloudflare/workers-types": "catalog:",
 		"@personalWebsite/config": "workspace:*",
 		"@types/node": "^22.13.14",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.5.0",
 		"turbo": "^2.9.16",
 		"typescript": "catalog:"
 	},
