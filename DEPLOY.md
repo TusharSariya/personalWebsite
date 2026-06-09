@@ -74,7 +74,14 @@ cd packages/infra
 bun run deploy --stage prod
 ```
 
-This creates the `alchemy-state-service` Worker. Copy the **`ALCHEMY_STATE_TOKEN`** it prints (or find it in the Alchemy output / Cloudflare dashboard) into GitHub secrets.
+Generate a state token and add it to `packages/infra/.env`, then deploy once to create the `alchemy-state-service` Worker:
+
+```bash
+openssl rand -base64 32   # paste into ALCHEMY_STATE_TOKEN in packages/infra/.env
+cd packages/infra && STAGE=prod bun run deploy
+```
+
+Use the same `ALCHEMY_STATE_TOKEN` value in GitHub secrets.
 
 ### 6. GitHub repository secrets
 
@@ -104,7 +111,7 @@ Server -> https://...
 
 | Event | Stage | Action |
 |-------|-------|--------|
-| Push to `main` | `prod` | Migrate DB → deploy Workers |
+| Push to `master` | `prod` | Migrate DB → deploy Workers |
 | Open/update PR | `pr-{number}` | Migrate staging DB → deploy preview Workers → comment on PR |
 | Close PR | `pr-{number}` | Destroy preview Workers |
 
