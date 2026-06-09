@@ -62,6 +62,10 @@ lerna-debug.log*
 # Better-T-Stack / infra
 .alchemy/
 
+# Supabase CLI (local development)
+supabase/.temp/
+supabase/.branches/
+
 # Testing
 coverage/
 .nyc_output/
