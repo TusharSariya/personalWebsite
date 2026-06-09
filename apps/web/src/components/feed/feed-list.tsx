@@ -70,9 +70,11 @@ export function FeedList() {
 				{usesMockFeed ? null : (
 					<p className="text-muted-foreground text-sm">
 						Sign in and run{" "}
-						<code className="rounded bg-muted px-1">bun run dev:server</code>,
-						or set{" "}
-						<code className="rounded bg-muted px-1">
+						<code className="border border-border bg-muted px-1">
+							bun run dev:server
+						</code>
+						, or set{" "}
+						<code className="border border-border bg-muted px-1">
 							VITE_USE_MOCK_FEED=true
 						</code>{" "}
 						in apps/web/.env for demo posts.
@@ -85,7 +87,7 @@ export function FeedList() {
 
 	if (posts.length === 0) {
 		return (
-			<div className="rounded-xl border p-8 text-center">
+			<div className="retro-panel p-8 text-center">
 				<h2 className="mb-2 font-semibold text-xl">Your feed is empty</h2>
 				<p className="mb-4 text-muted-foreground">
 					{usesMockFeed

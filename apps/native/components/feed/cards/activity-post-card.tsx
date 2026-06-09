@@ -10,7 +10,7 @@ export function ActivityPostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<View className="rounded-lg border border-border bg-muted/30 p-4">
+		<View className="retro-panel-inset p-4">
 			<Text className="font-semibold text-foreground text-lg">
 				{content.title}
 			</Text>

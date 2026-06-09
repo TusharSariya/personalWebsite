@@ -36,7 +36,7 @@ export default function Home() {
 					</Text>
 					<Text className="mb-4 text-muted text-sm">{session.user.email}</Text>
 					<Pressable
-						className="self-start rounded-lg bg-danger px-4 py-3 active:opacity-70"
+						className="self-start border-2 border-border bg-danger px-4 py-3 active:opacity-70"
 						onPress={async () => {
 							await signOutAppSession();
 							queryClient.invalidateQueries();
@@ -62,7 +62,7 @@ export default function Home() {
 				<Card className="p-4">
 					<View className="flex-row items-center">
 						<View
-							className={`mr-3 h-3 w-3 rounded-full ${isConnected ? "bg-success" : "bg-muted"}`}
+							className={`mr-3 h-3 w-3 border border-border ${isConnected ? "bg-success" : "bg-muted"}`}
 						/>
 						<View className="flex-1">
 							<Text className="mb-1 font-medium text-foreground">

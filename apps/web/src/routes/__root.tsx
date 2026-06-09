@@ -53,7 +53,7 @@ function RootDocument() {
 			<body>
 				<div className="grid h-svh grid-rows-[auto_1fr]">
 					<Header />
-					<main className="min-h-0 overflow-hidden">
+					<main className="min-h-0 overflow-hidden border-border border-x-2">
 						<Outlet />
 					</main>
 				</div>

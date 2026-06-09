@@ -46,7 +46,8 @@
 		"deploy": "turbo -F @personalWebsite/infra deploy -- --stage prod",
 		"destroy": "turbo -F @personalWebsite/infra destroy",
 		"check": "biome check --write .",
-		"extract:garmin-fixture": "bun packages/api/scripts/extract-garmin-fixture.ts"
+		"extract:garmin-fixture": "bun packages/api/scripts/extract-garmin-fixture.ts",
+		"fetch:ioskeley-mono": "bun scripts/fetch-ioskeley-mono.ts"
 	},
 	"lint-staged": {
 		"*.{js,ts,tsx,json,jsonc,css}": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"

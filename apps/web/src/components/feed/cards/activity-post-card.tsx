@@ -9,7 +9,7 @@ export function ActivityPostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<div className="rounded-lg border bg-muted/30 p-4">
+		<div className="retro-panel-inset p-4">
 			<h2 className="font-semibold text-lg">{content.title}</h2>
 			<p className="text-muted-foreground text-sm capitalize">
 				{content.activityType}

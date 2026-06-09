@@ -11,7 +11,7 @@ export function ArticlePostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<View className="gap-3 rounded-lg border border-border bg-muted/30 p-4">
+		<View className="retro-panel-inset gap-3 p-4">
 			<View className="gap-1">
 				<Text className="font-semibold text-foreground text-lg">
 					{content.title}
@@ -26,7 +26,8 @@ export function ArticlePostCard({ post }: { post: Post }) {
 						<Image
 							key={url}
 							source={{ uri: url }}
-							style={{ flex: 1, height: 100, borderRadius: 8 }}
+							style={{ flex: 1, height: 100, borderRadius: 0 }}
+							className="border border-border"
 							contentFit="cover"
 						/>
 					))}

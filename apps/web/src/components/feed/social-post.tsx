@@ -43,12 +43,15 @@ export function SocialPost({
 	const isText = post.type === "text";
 
 	return (
-		<article className="border-border border-b py-4">
+		<article
+			className="border-border border-b py-4"
+			style={{ contentVisibility: "auto", containIntrinsicSize: "0 480px" }}
+		>
 			<header className="mb-3 flex items-center gap-3 px-4">
 				<img
 					src={MOCK_FEED_AUTHOR.avatarUrl}
 					alt={MOCK_FEED_AUTHOR.displayName}
-					className="h-9 w-9 rounded-full object-cover"
+					className="h-9 w-9 border-2 border-border object-cover"
 				/>
 				<div className="min-w-0 flex-1">
 					<p className="font-semibold text-sm leading-tight">

@@ -15,12 +15,13 @@ export function BookReviewPostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<View className="rounded-lg border border-border bg-muted/30 p-4">
+		<View className="retro-panel-inset p-4">
 			<View className="flex-row gap-4">
 				{content.coverUrl ? (
 					<Image
 						source={{ uri: content.coverUrl }}
-						style={{ width: 72, height: 108, borderRadius: 8 }}
+						style={{ width: 72, height: 108, borderRadius: 0 }}
+						className="border border-border"
 						contentFit="cover"
 					/>
 				) : null}
@@ -32,7 +33,7 @@ export function BookReviewPostCard({ post }: { post: Post }) {
 					{content.rating != null ? (
 						<StarRating rating={content.rating} />
 					) : null}
-					<Text className="self-start rounded-full bg-muted px-2 py-0.5 text-muted text-xs capitalize">
+					<Text className="retro-badge self-start bg-muted text-muted capitalize">
 						{content.status.replaceAll("_", " ")}
 					</Text>
 				</View>

@@ -43,7 +43,8 @@ export function SocialPost({
 			<View className="mb-3 flex-row items-center gap-3 px-4">
 				<Image
 					source={{ uri: MOCK_FEED_AUTHOR.avatarUrl }}
-					style={{ width: 36, height: 36, borderRadius: 18 }}
+					style={{ width: 36, height: 36, borderRadius: 0, borderWidth: 2 }}
+					className="border-border"
 					contentFit="cover"
 				/>
 				<View className="min-w-0 flex-1">

@@ -2,6 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useThemeColor } from "heroui-native";
 
+import { IOSKELEY_FONT_FAMILY } from "@/lib/fonts";
+
 export default function TabLayout() {
 	const themeColorForeground = useThemeColor("foreground");
 	const themeColorBackground = useThemeColor("background");
@@ -12,14 +14,17 @@ export default function TabLayout() {
 				headerShown: false,
 				headerStyle: {
 					backgroundColor: themeColorBackground,
-				},
-				headerTintColor: themeColorForeground,
-				headerTitleStyle: {
-					color: themeColorForeground,
-					fontWeight: "600",
+					borderBottomWidth: 2,
 				},
 				tabBarStyle: {
 					backgroundColor: themeColorBackground,
+					borderTopWidth: 2,
+				},
+				headerTintColor: themeColorForeground,
+				headerTitleStyle: {
+					fontFamily: IOSKELEY_FONT_FAMILY,
+					color: themeColorForeground,
+					fontWeight: "600",
 				},
 			}}
 		>

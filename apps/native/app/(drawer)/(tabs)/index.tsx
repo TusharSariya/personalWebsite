@@ -26,10 +26,12 @@ export default function FeedScreen() {
 
 	return (
 		<Container className="flex-1">
-			<View className="border-border border-b px-4 py-3">
-				<Text className="font-semibold text-foreground text-lg">Home</Text>
+			<View className="border-border border-b-2 px-4 py-3">
+				<Text className="font-semibold text-foreground text-lg uppercase tracking-wide">
+					Home
+				</Text>
 				{usesMockFeed ? (
-					<Text className="mt-1 text-muted text-xs">
+					<Text className="retro-label mt-1">
 						Demo feed — scroll to load more
 					</Text>
 				) : null}

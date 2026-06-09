@@ -1,3 +1,5 @@
+.tmp/
+
 # Local Garmin exports (regenerate fixture with bun run extract:garmin-fixture)
 /activity_*.tcx
 /activity_*.gpx

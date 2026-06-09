@@ -6,6 +6,7 @@ import React, { useCallback } from "react";
 import { Pressable, Text } from "react-native";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { IOSKELEY_FONT_FAMILY } from "@/lib/fonts";
 
 function DrawerLayout() {
 	const themeColorForeground = useThemeColor("foreground");
@@ -17,8 +18,12 @@ function DrawerLayout() {
 		<Drawer
 			screenOptions={{
 				headerTintColor: themeColorForeground,
-				headerStyle: { backgroundColor: themeColorBackground },
+				headerStyle: {
+					backgroundColor: themeColorBackground,
+					borderBottomWidth: 2,
+				},
 				headerTitleStyle: {
+					fontFamily: IOSKELEY_FONT_FAMILY,
 					fontWeight: "600",
 					color: themeColorForeground,
 				},

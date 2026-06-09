@@ -15,9 +15,12 @@ function Modal() {
 	return (
 		<Container>
 			<View className="flex-1 items-center justify-center p-4">
-				<Surface variant="secondary" className="w-full max-w-sm rounded-lg p-5">
+				<Surface
+					variant="secondary"
+					className="retro-panel w-full max-w-sm p-5"
+				>
 					<View className="items-center">
-						<View className="mb-3 h-12 w-12 items-center justify-center rounded-lg bg-accent">
+						<View className="mb-3 h-12 w-12 items-center justify-center border-2 border-border bg-accent">
 							<Ionicons
 								name="checkmark"
 								size={24}

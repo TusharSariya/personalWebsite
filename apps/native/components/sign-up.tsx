@@ -102,8 +102,8 @@ export function SignUp() {
 	});
 
 	return (
-		<Surface variant="secondary" className="rounded-lg p-4">
-			<Text className="mb-4 font-medium text-foreground">Create Account</Text>
+		<Surface variant="secondary" className="retro-panel p-4">
+			<Text className="retro-label mb-4 text-foreground">Create Account</Text>
 
 			<form.Subscribe
 				selector={(state) => ({

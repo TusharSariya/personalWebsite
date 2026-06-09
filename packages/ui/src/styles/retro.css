@@ -1,0 +1,42 @@
+@layer components {
+	.retro-panel {
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--border);
+		background-color: var(--card);
+		box-shadow: 3px 3px 0 0 var(--border);
+	}
+
+	.retro-panel-inset {
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--border);
+		background-color: color-mix(in oklch, var(--muted) 50%, transparent);
+	}
+
+	.retro-badge {
+		display: inline-block;
+		border-width: 1px;
+		border-style: solid;
+		border-color: var(--border);
+		padding: 0.125rem 0.5rem;
+		font-size: 0.75rem;
+		line-height: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.retro-label {
+		font-size: 0.75rem;
+		line-height: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--muted-foreground);
+	}
+
+	.retro-divider {
+		border-bottom-width: 2px;
+		border-bottom-style: solid;
+		border-bottom-color: var(--border);
+	}
+}

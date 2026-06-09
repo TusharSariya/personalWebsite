@@ -9,7 +9,7 @@ export function ArticlePostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<div className="space-y-3 rounded-lg border bg-muted/30 p-4">
+		<div className="retro-panel-inset space-y-3 p-4">
 			<div className="space-y-1">
 				<h2 className="font-semibold text-lg leading-snug">{content.title}</h2>
 				<p className="text-muted-foreground text-sm leading-relaxed">
@@ -23,7 +23,7 @@ export function ArticlePostCard({ post }: { post: Post }) {
 							key={url}
 							src={url}
 							alt=""
-							className="aspect-[4/3] w-full rounded-md object-cover"
+							className="aspect-[4/3] w-full border border-border object-cover"
 							loading="lazy"
 							fetchPriority="low"
 						/>

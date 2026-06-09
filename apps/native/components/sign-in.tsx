@@ -129,8 +129,8 @@ function SignIn() {
 	});
 
 	return (
-		<Surface variant="secondary" className="rounded-lg p-4">
-			<Text className="mb-4 font-medium text-foreground">Sign In</Text>
+		<Surface variant="secondary" className="retro-panel p-4">
+			<Text className="retro-label mb-4 text-foreground">Sign In</Text>
 			{mockAuthEnabled ? (
 				<Text className="mb-3 text-muted text-sm">Dev mode: admin / admin</Text>
 			) : null}

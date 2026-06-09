@@ -13,13 +13,13 @@ export function BookReviewPostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<div className="rounded-lg border bg-muted/30 p-4">
+		<div className="retro-panel-inset p-4">
 			<div className="flex gap-4">
 				{content.coverUrl ? (
 					<img
 						src={content.coverUrl}
 						alt={content.title}
-						className="h-36 w-24 shrink-0 rounded-md object-cover shadow-sm"
+						className="h-36 w-24 shrink-0 border border-border object-cover"
 						loading="lazy"
 					/>
 				) : null}
@@ -33,7 +33,7 @@ export function BookReviewPostCard({ post }: { post: Post }) {
 					{content.rating != null ? (
 						<StarRating rating={content.rating} />
 					) : null}
-					<span className="inline-block rounded-full bg-muted px-2 py-0.5 text-muted-foreground text-xs capitalize">
+					<span className="retro-badge bg-muted text-muted-foreground capitalize">
 						{content.status.replaceAll("_", " ")}
 					</span>
 				</div>

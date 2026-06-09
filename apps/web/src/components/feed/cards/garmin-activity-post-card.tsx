@@ -18,7 +18,7 @@ export function GarminActivityPostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<div className="overflow-hidden rounded-lg border">
+		<div className="retro-panel-inset overflow-hidden">
 			{content.mapImageUrl ? (
 				<img
 					src={content.mapImageUrl}
@@ -36,7 +36,7 @@ export function GarminActivityPostCard({ post }: { post: Post }) {
 						</p>
 					</div>
 					{content.device ? (
-						<span className="shrink-0 rounded-full bg-sky-500/10 px-2.5 py-1 font-medium text-sky-600 text-xs dark:text-sky-400">
+						<span className="retro-badge shrink-0 bg-sky-500/10 font-medium text-sky-600 dark:text-sky-400">
 							{content.device}
 						</span>
 					) : null}
@@ -84,7 +84,7 @@ function Stat({
 	icon?: ReactNode;
 }) {
 	return (
-		<div className="rounded-md bg-muted/50 px-3 py-2">
+		<div className="border border-border bg-muted/50 px-3 py-2">
 			<p className="text-muted-foreground text-xs">{label}</p>
 			<p className="mt-0.5 flex items-center gap-1 font-semibold text-sm">
 				{icon}

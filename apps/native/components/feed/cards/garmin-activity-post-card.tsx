@@ -18,7 +18,7 @@ export function GarminActivityPostCard({ post }: { post: Post }) {
 	};
 
 	return (
-		<View className="overflow-hidden rounded-lg border border-border">
+		<View className="retro-panel-inset overflow-hidden">
 			{content.mapImageUrl ? (
 				<Image
 					source={{ uri: content.mapImageUrl }}
@@ -37,7 +37,7 @@ export function GarminActivityPostCard({ post }: { post: Post }) {
 						</Text>
 					</View>
 					{content.device ? (
-						<Text className="rounded-full bg-sky-500/10 px-2.5 py-1 font-medium text-sky-500 text-xs">
+						<Text className="retro-badge bg-sky-500/10 font-medium text-sky-500">
 							{content.device}
 						</Text>
 					) : null}
@@ -66,7 +66,7 @@ export function GarminActivityPostCard({ post }: { post: Post }) {
 
 function Stat({ label, value }: { label: string; value: string }) {
 	return (
-		<View className="min-w-[45%] flex-1 rounded-md bg-muted/50 px-3 py-2">
+		<View className="min-w-[45%] flex-1 border border-border bg-muted/50 px-3 py-2">
 			<Text className="text-muted text-xs">{label}</Text>
 			<Text className="mt-0.5 font-semibold text-foreground text-sm">
 				{value}
