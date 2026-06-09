@@ -14,7 +14,10 @@ import { Text, type TextInput, View } from "react-native";
 import z from "zod";
 
 import { authClient } from "@/lib/auth-client";
-import { isMockAuthEnabled, signInWithMockDevCredentials } from "@/lib/mock-auth";
+import {
+	isMockAuthEnabled,
+	signInWithMockDevCredentials,
+} from "@/lib/mock-auth";
 import { queryClient } from "@/utils/orpc";
 
 function getSignInSchema() {
@@ -129,9 +132,7 @@ function SignIn() {
 		<Surface variant="secondary" className="rounded-lg p-4">
 			<Text className="mb-4 font-medium text-foreground">Sign In</Text>
 			{mockAuthEnabled ? (
-				<Text className="mb-3 text-muted text-sm">
-					Dev mode: admin / admin
-				</Text>
+				<Text className="mb-3 text-muted text-sm">Dev mode: admin / admin</Text>
 			) : null}
 
 			<form.Subscribe

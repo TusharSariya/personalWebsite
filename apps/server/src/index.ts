@@ -6,10 +6,11 @@ import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
 import { createContext } from "@personalWebsite/api/context";
 import { appRouter } from "@personalWebsite/api/routers/index";
 import { createAuth } from "@personalWebsite/auth";
-import { env } from "@personalWebsite/env/server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+
+import { resolveCorsOrigin } from "./cors";
 
 const app = new Hono();
 
@@ -17,7 +18,7 @@ app.use(logger());
 app.use(
 	"/*",
 	cors({
-		origin: env.CORS_ORIGIN,
+		origin: (origin) => resolveCorsOrigin(origin),
 		allowMethods: ["GET", "POST", "OPTIONS"],
 		allowHeaders: ["Content-Type", "Authorization"],
 		credentials: true,

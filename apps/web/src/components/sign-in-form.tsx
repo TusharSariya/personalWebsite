@@ -8,7 +8,10 @@ import z from "zod";
 
 import { useAppSession } from "@/lib/app-session";
 import { authClient } from "@/lib/auth-client";
-import { isMockAuthEnabled, signInWithMockDevCredentials } from "@/lib/mock-auth";
+import {
+	isMockAuthEnabled,
+	signInWithMockDevCredentials,
+} from "@/lib/mock-auth";
 
 import Loader from "./loader";
 

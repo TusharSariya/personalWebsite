@@ -11,6 +11,6 @@ export {
 	MOCK_DEV_PASSWORD,
 	MOCK_DEV_USER_ID,
 	MOCK_DEV_USERNAME,
-	normalizeMockDevIdentifier,
 	type MockAuthSession,
+	normalizeMockDevIdentifier,
 } from "./mock-dev";

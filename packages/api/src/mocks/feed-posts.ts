@@ -154,10 +154,7 @@ export const MOCK_FEED_POSTS: Post[] = demoPostTemplates.map((demo, index) => ({
 	createdAt: new Date(Date.now() - index * 60 * 60 * 1000).toISOString(),
 }));
 
-export function listMockPosts(
-	cursor?: string,
-	limit = 20,
-): ListPostsOutput {
+export function listMockPosts(cursor?: string, limit = 20): ListPostsOutput {
 	let startIndex = 0;
 
 	if (cursor) {

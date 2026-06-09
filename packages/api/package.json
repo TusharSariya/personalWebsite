@@ -8,12 +8,12 @@
 		"./*": {
 			"default": "./src/*.ts"
 		},
-    "./schemas/posts": {
-      "default": "./src/schemas/posts.ts"
-    },
-    "./mocks": {
-      "default": "./src/mocks/index.ts"
-    }
+		"./schemas/posts": {
+			"default": "./src/schemas/posts.ts"
+		},
+		"./mocks": {
+			"default": "./src/mocks/index.ts"
+		}
 	},
 	"scripts": {},
 	"dependencies": {

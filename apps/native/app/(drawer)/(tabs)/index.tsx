@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import { Container } from "@/components/container";
 import { FeedList } from "@/components/feed/feed-list";
 import { SignIn } from "@/components/sign-in";
-import { isMockFeedEnabled } from "@/lib/mock-feed";
 import { useAppSession } from "@/lib/app-session";
+import { isMockFeedEnabled } from "@/lib/mock-feed";
 
 export default function FeedScreen() {
 	const { data: session } = useAppSession();

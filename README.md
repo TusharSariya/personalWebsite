@@ -300,7 +300,8 @@ Mobile is the same flow, except Expo sends the session cookie manually (see `app
 |---------|----------------|
 | `bun run dev` | Start web + server + native together |
 | `bun run dev:web` | Web only (port 3001) |
-| `bun run dev:server` | API + web via Alchemy (port 3000 API, 3001 web) |
+| `bun run dev:server` | Local API via Wrangler (port 3000; no Cloudflare account needed) |
+| `bun run dev:alchemy` | API + web via Alchemy (requires Cloudflare credentials) |
 | `bun run dev:native` | Expo dev server |
 | `bun run build` | Production build for all apps |
 | `bun run check-types` | TypeScript check across the monorepo |

@@ -1,21 +1,21 @@
 {
-  "expo": {
-    "scheme": "personalwebsite",
-    "userInterfaceStyle": "automatic",
-    "orientation": "default",
-    "web": {
-      "bundler": "metro"
-    },
-    "name": "personalWebsite",
-    "slug": "personalWebsite",
-    "plugins": [
-      "expo-font",
-      "expo-router",
-      "expo-secure-store",
-      "expo-web-browser"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
-  }
+	"expo": {
+		"scheme": "personalwebsite",
+		"userInterfaceStyle": "automatic",
+		"orientation": "default",
+		"web": {
+			"bundler": "metro"
+		},
+		"name": "personalWebsite",
+		"slug": "personalWebsite",
+		"plugins": [
+			"expo-font",
+			"expo-router",
+			"expo-secure-store",
+			"expo-web-browser"
+		],
+		"experiments": {
+			"typedRoutes": true
+		}
+	}
 }

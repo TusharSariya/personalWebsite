@@ -5,8 +5,18 @@ import { env } from "@personalWebsite/env/server";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
+function workersDevCookieDomain(): string | undefined {
+	const suffix = env.WORKERS_DEV_SUBDOMAIN?.trim();
+	if (!suffix) {
+		return undefined;
+	}
+
+	return suffix.startsWith(".") ? suffix : `.${suffix}`;
+}
+
 export function createAuth() {
 	const db = createDb();
+	const crossSubDomainDomain = workersDevCookieDomain();
 
 	return betterAuth({
 		database: drizzleAdapter(db, {
@@ -23,13 +33,16 @@ export function createAuth() {
 		emailAndPassword: {
 			enabled: true,
 		},
-		// uncomment cookieCache setting when ready to deploy to Cloudflare using *.workers.dev domains
-		// session: {
-		//   cookieCache: {
-		//     enabled: true,
-		//     maxAge: 60,
-		//   },
-		// },
+		...(crossSubDomainDomain
+			? {
+					session: {
+						cookieCache: {
+							enabled: true,
+							maxAge: 5 * 60,
+						},
+					},
+				}
+			: {}),
 		secret: env.BETTER_AUTH_SECRET,
 		baseURL: env.BETTER_AUTH_URL,
 		advanced: {
@@ -38,12 +51,14 @@ export function createAuth() {
 				secure: true,
 				httpOnly: true,
 			},
-			// uncomment crossSubDomainCookies setting when ready to deploy and replace <your-workers-subdomain> with your actual workers subdomain
-			// https://developers.cloudflare.com/workers/wrangler/configuration/#workersdev
-			// crossSubDomainCookies: {
-			//   enabled: true,
-			//   domain: "<your-workers-subdomain>",
-			// },
+			...(crossSubDomainDomain
+				? {
+						crossSubDomainCookies: {
+							enabled: true,
+							domain: crossSubDomainDomain,
+						},
+					}
+				: {}),
 		},
 		plugins: [expo()],
 	});

@@ -1,0 +1,10 @@
+{
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+	"name": "personalwebsite-server-local",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-03-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"dev": {
+		"port": 3000
+	}
+}
