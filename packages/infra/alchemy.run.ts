@@ -12,7 +12,7 @@ const stage = process.env.STAGE ?? process.env.ALCHEMY_STAGE ?? "dev";
 const isPreview = stage.startsWith("pr-");
 
 const databaseUrlSecret = isPreview
-	? (process.env.DATABASE_URL_STAGING ?? process.env.DATABASE_URL)
+	? process.env.DATABASE_URL_STAGING || process.env.DATABASE_URL
 	: process.env.DATABASE_URL;
 
 if (!databaseUrlSecret) {
@@ -43,7 +43,7 @@ const app = await alchemy("personalWebsite", {
 
 const sharedBindings = {
 	DATABASE_URL: alchemy.secret(databaseUrlSecret),
-	BETTER_AUTH_SECRET: alchemy.secret.env.BETTER_AUTH_SECRET,
+	BETTER_AUTH_SECRET: alchemy.secret(process.env.BETTER_AUTH_SECRET),
 	WORKERS_DEV_SUBDOMAIN: alchemy.env.WORKERS_DEV_SUBDOMAIN ?? "",
 };
 
