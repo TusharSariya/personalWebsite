@@ -91,8 +91,12 @@ Both should include:
 
 ```env
 VITE_USE_MOCK_FEED=true          # web
+VITE_USE_MOCK_AUTH=true          # web — dev login admin / admin
 EXPO_PUBLIC_USE_MOCK_FEED=true   # mobile
+EXPO_PUBLIC_USE_MOCK_AUTH=true   # mobile — dev login admin / admin
 ```
+
+Sign in on `/login` (web) or the Home drawer screen (mobile) with **admin** / **admin** when mock auth is enabled.
 
 ### 2. Launch web only
 
@@ -114,7 +118,7 @@ Open the **Feed** tab in Expo Go or the simulator. No sign-in required in mock m
 
 ### Switch to the real API later
 
-Set `VITE_USE_MOCK_FEED=false` and `EXPO_PUBLIC_USE_MOCK_FEED=false`, then follow full setup below.
+Set `VITE_USE_MOCK_FEED=false`, `VITE_USE_MOCK_AUTH=false`, `EXPO_PUBLIC_USE_MOCK_FEED=false`, and `EXPO_PUBLIC_USE_MOCK_AUTH=false`, then follow full setup below.
 
 ---
 

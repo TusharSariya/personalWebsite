@@ -6,7 +6,9 @@ import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import z from "zod";
 
+import { useAppSession } from "@/lib/app-session";
 import { authClient } from "@/lib/auth-client";
+import { isMockAuthEnabled, signInWithMockDevCredentials } from "@/lib/mock-auth";
 
 import Loader from "./loader";
 
@@ -18,14 +20,29 @@ export default function SignInForm({
 	const navigate = useNavigate({
 		from: "/",
 	});
-	const { isPending } = authClient.useSession();
+	const { isPending } = useAppSession();
+	const mockAuthEnabled = isMockAuthEnabled();
 
 	const form = useForm({
 		defaultValues: {
-			email: "",
-			password: "",
+			email: mockAuthEnabled ? "admin" : "",
+			password: mockAuthEnabled ? "admin" : "",
 		},
 		onSubmit: async ({ value }) => {
+			if (mockAuthEnabled) {
+				const session = signInWithMockDevCredentials(
+					value.email,
+					value.password,
+				);
+				if (session) {
+					navigate({ to: "/dashboard" });
+					toast.success("Signed in as dev admin");
+					return;
+				}
+				toast.error("Use admin / admin in mock auth mode");
+				return;
+			}
+
 			await authClient.signIn.email(
 				{
 					email: value.email,
@@ -46,8 +63,12 @@ export default function SignInForm({
 		},
 		validators: {
 			onSubmit: z.object({
-				email: z.email("Invalid email address"),
-				password: z.string().min(8, "Password must be at least 8 characters"),
+				email: mockAuthEnabled
+					? z.string().min(1, "Username is required")
+					: z.email("Invalid email address"),
+				password: mockAuthEnabled
+					? z.string().min(1, "Password is required")
+					: z.string().min(8, "Password must be at least 8 characters"),
 			}),
 		},
 	});
@@ -59,6 +80,11 @@ export default function SignInForm({
 	return (
 		<div className="mx-auto mt-10 w-full max-w-md p-6">
 			<h1 className="mb-6 text-center font-bold text-3xl">Welcome Back</h1>
+			{mockAuthEnabled ? (
+				<p className="mb-4 text-center text-muted-foreground text-sm">
+					Dev mode: sign in with <strong>admin</strong> / <strong>admin</strong>
+				</p>
+			) : null}
 
 			<form
 				onSubmit={(e) => {

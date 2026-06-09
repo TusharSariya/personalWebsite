@@ -6,7 +6,7 @@ import { Pressable, Text, View } from "react-native";
 import { Container } from "@/components/container";
 import { SignIn } from "@/components/sign-in";
 import { SignUp } from "@/components/sign-up";
-import { authClient } from "@/lib/auth-client";
+import { signOutAppSession, useAppSession } from "@/lib/app-session";
 import { orpc, queryClient } from "@/utils/orpc";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
 	const privateData = useQuery(orpc.privateData.queryOptions());
 	const isConnected = healthCheck?.data === "OK";
 	const isLoading = healthCheck?.isLoading;
-	const { data: session } = authClient.useSession();
+	const { data: session } = useAppSession();
 
 	const mutedColor = useThemeColor("muted");
 	const successColor = useThemeColor("success");
@@ -37,8 +37,8 @@ export default function Home() {
 					<Text className="mb-4 text-muted text-sm">{session.user.email}</Text>
 					<Pressable
 						className="self-start rounded-lg bg-danger px-4 py-3 active:opacity-70"
-						onPress={() => {
-							authClient.signOut();
+						onPress={async () => {
+							await signOutAppSession();
 							queryClient.invalidateQueries();
 						}}
 					>

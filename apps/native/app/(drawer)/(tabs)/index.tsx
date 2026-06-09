@@ -4,10 +4,10 @@ import { Container } from "@/components/container";
 import { FeedList } from "@/components/feed/feed-list";
 import { SignIn } from "@/components/sign-in";
 import { isMockFeedEnabled } from "@/lib/mock-feed";
-import { authClient } from "@/lib/auth-client";
+import { useAppSession } from "@/lib/app-session";
 
 export default function FeedScreen() {
-	const { data: session } = authClient.useSession();
+	const { data: session } = useAppSession();
 	const usesMockFeed = isMockFeedEnabled();
 
 	if (!usesMockFeed && !session?.user) {

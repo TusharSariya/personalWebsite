@@ -11,11 +11,13 @@ import {
 import { Skeleton } from "@personalWebsite/ui/components/skeleton";
 import { Link, useNavigate } from "@tanstack/react-router";
 
+import { signOutAppSession, useAppSession } from "@/lib/app-session";
 import { authClient } from "@/lib/auth-client";
+import { isMockAuthEnabled } from "@/lib/mock-auth";
 
 export default function UserMenu() {
 	const navigate = useNavigate();
-	const { data: session, isPending } = authClient.useSession();
+	const { data: session, isPending } = useAppSession();
 
 	if (isPending) {
 		return <Skeleton className="h-9 w-24" />;
@@ -42,6 +44,12 @@ export default function UserMenu() {
 					<DropdownMenuItem
 						variant="destructive"
 						onClick={() => {
+							if (isMockAuthEnabled()) {
+								signOutAppSession();
+								navigate({ to: "/" });
+								return;
+							}
+
 							authClient.signOut({
 								fetchOptions: {
 									onSuccess: () => {

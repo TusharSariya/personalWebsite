@@ -14,19 +14,29 @@ import { Text, type TextInput, View } from "react-native";
 import z from "zod";
 
 import { authClient } from "@/lib/auth-client";
+import { isMockAuthEnabled, signInWithMockDevCredentials } from "@/lib/mock-auth";
 import { queryClient } from "@/utils/orpc";
 
-const signInSchema = z.object({
-	email: z
-		.string()
-		.trim()
-		.min(1, "Email is required")
-		.email("Enter a valid email address"),
-	password: z
-		.string()
-		.min(1, "Password is required")
-		.min(8, "Use at least 8 characters"),
-});
+function getSignInSchema() {
+	if (isMockAuthEnabled()) {
+		return z.object({
+			email: z.string().trim().min(1, "Username is required"),
+			password: z.string().min(1, "Password is required"),
+		});
+	}
+
+	return z.object({
+		email: z
+			.string()
+			.trim()
+			.min(1, "Email is required")
+			.email("Enter a valid email address"),
+		password: z
+			.string()
+			.min(1, "Password is required")
+			.min(8, "Use at least 8 characters"),
+	});
+}
 
 function getErrorMessage(error: unknown): string | null {
 	if (!error) return null;
@@ -58,16 +68,38 @@ function getErrorMessage(error: unknown): string | null {
 function SignIn() {
 	const passwordInputRef = useRef<TextInput>(null);
 	const { toast } = useToast();
+	const mockAuthEnabled = isMockAuthEnabled();
 
 	const form = useForm({
 		defaultValues: {
-			email: "",
-			password: "",
+			email: mockAuthEnabled ? "admin" : "",
+			password: mockAuthEnabled ? "admin" : "",
 		},
 		validators: {
-			onSubmit: signInSchema,
+			onSubmit: getSignInSchema(),
 		},
 		onSubmit: async ({ value, formApi }) => {
+			if (mockAuthEnabled) {
+				const session = await signInWithMockDevCredentials(
+					value.email,
+					value.password,
+				);
+				if (session) {
+					formApi.reset();
+					toast.show({
+						variant: "success",
+						label: "Signed in as dev admin",
+					});
+					queryClient.refetchQueries();
+					return;
+				}
+				toast.show({
+					variant: "danger",
+					label: "Use admin / admin in mock auth mode",
+				});
+				return;
+			}
+
 			await authClient.signIn.email(
 				{
 					email: value.email.trim(),
@@ -96,6 +128,11 @@ function SignIn() {
 	return (
 		<Surface variant="secondary" className="rounded-lg p-4">
 			<Text className="mb-4 font-medium text-foreground">Sign In</Text>
+			{mockAuthEnabled ? (
+				<Text className="mb-3 text-muted text-sm">
+					Dev mode: admin / admin
+				</Text>
+			) : null}
 
 			<form.Subscribe
 				selector={(state) => ({
