@@ -4,6 +4,8 @@ A personal app for logging your life in one place: photos, workouts, books, and 
 
 Built with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack).
 
+Pull requests deploy per-PR Cloudflare preview Workers (`pr-{number}`) via GitHub Actions. See [DEPLOY.md](DEPLOY.md).
+
 ---
 
 ## What you have (big picture)
